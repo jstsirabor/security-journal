@@ -1,0 +1,3 @@
+- Overwrite vs append — destructive vs additive operations
+- File operations are permanent — no undo in the terminal
+- Security tools always append logs, never overwrite

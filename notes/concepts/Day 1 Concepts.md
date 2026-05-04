@@ -1,0 +1,4 @@
+- The Linux filesystem hierarchy — everything is a file, everything has a place
+- Hidden files exist for organization, not security
+- Configuration files control system and user behaviour
+- Living off the land — attackers use existing tools to avoid detection
