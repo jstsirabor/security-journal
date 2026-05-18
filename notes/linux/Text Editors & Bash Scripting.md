@@ -1,17 +1,17 @@
 **Vim — Essential Commands**
 
-|Command|Action|
-|---|---|
-|`vim filename`|Open file|
-|`i`|Enter insert mode (start typing)|
-|`Escape`|Return to normal mode|
-|`:w`|Save|
-|`:q`|Quit|
-|`:wq`|Save and quit|
-|`:q!`|Quit without saving|
-|`/word`|Search for word|
-|`n`|Jump to next search result|
-|`dd`|Delete current line|
+| Command        | Action                           |
+| -------------- | -------------------------------- |
+| `vim filename` | Open file                        |
+| `i`            | Enter insert mode (start typing) |
+| `Escape`       | Return to normal mode            |
+| `:w`           | Save                             |
+| `:q`           | Quit                             |
+| `:wq`          | Save and quit                    |
+| `:q!`          | Quit without saving              |
+| `/word`        | Search for word                  |
+| `n`            | Jump to next search result       |
+| `dd`           | Delete current line              |
 
 Run `vimtutor` to practice interactively.
 
@@ -95,12 +95,13 @@ fi
 
 **Common Conditions**
 
-|Condition|Meaning|
-|---|---|
-|`[ -f "file" ]`|File exists|
-|`[ -z "$VAR" ]`|Variable is empty|
-|`[ "$A" == "$B" ]`|A equals B|
-|`[ "$A" != "$B" ]`|A does not equal B|
+| Condition          | Meaning            |
+| ------------------ | ------------------ |
+| `[ -f "file" ]`    | File exists        |
+| `[ -d "dir" ]`     | Directory exists   |
+| `[ -z "$VAR" ]`    | Variable is empty  |
+| `[ "$A" == "$B" ]` | A equals B         |
+| `[ "$A" != "$B" ]` | A does not equal B |
 
 **Exit Codes**
 
@@ -119,3 +120,50 @@ Programs use these to communicate success or failure to other scripts.
 |---|---|
 |`-y`|Yes to all confirmations — keeps scripts running unattended|
 |`&&`|Run second command only if first succeeds|
+
+
+### Text Editors
+
+| Command / Shortcut | Action                           |
+| ------------------ | -------------------------------- |
+| `vim filename`     | Open file in Vim                 |
+| `i`                | Enter insert mode (start typing) |
+| `Esc`              | Return to normal mode            |
+| `:w`               | Save                             |
+| `:q`               | Quit                             |
+| `:wq`              | Save and quit                    |
+| `:q!`              | Quit without saving              |
+| `/word`            | Search for "word"                |
+| `n`                | Jump to next search result       |
+| `dd`               | Delete current line              |
+| `vimtutor`         | Interactive Vim tutorial         |
+| `nano filename`    | Open file in Nano                |
+| `Ctrl+O`           | Save                             |
+| `Ctrl+X`           | Exit                             |
+| `Ctrl+W`           | Search                           |
+| `Ctrl+K`           | Cut line                         |
+| `Ctrl+U`           | Paste                            |
+
+### Bash Scripting — Syntax
+
+|Syntax|Meaning|
+|---|---|
+|`#!/bin/bash`|Shebang — tells system which interpreter to use|
+|`# comment`|Comment — ignored by bash, read by humans|
+|`NAME="value"`|Assign a variable|
+|`echo "$NAME"`|Use a variable's value|
+|`$(command)`|Command substitution — captures output of a command|
+|`$1`, `$2`, ...|Script arguments ($1 = first argument)|
+|`"$@"`|All arguments, quoted (preserves spaces)|
+|`$#`|Number of arguments passed to script|
+|`if [ condition ]; then ... fi`|Conditional statement|
+|`[ -f "file" ]`|Test if a regular file exists|
+|`[ -d "path" ]`|Test if a directory exists|
+|`[ -z "$VAR" ]`|Test if a variable is empty|
+|`[ "$A" == "$B" ]`|String equality test|
+|`[ $num -eq 0 ]`|Numeric equality test|
+|`exit 0`|Exit with success (0 = success, non-zero = failure)|
+|`return N`|Return from a function with status N|
+|`$?`|Exit status of the last command|
+|`for var in list; do ... done`|Loop over a list of items|
+|`funcname() { ... }`|Define a function|
