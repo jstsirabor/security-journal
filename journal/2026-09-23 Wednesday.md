@@ -1,7 +1,7 @@
 ## Date: 2026-09-23
 
 ### What I tried
-- `grep "Failed password" /var/log/auth.log | cut -d " " -f 10 | sort | uniq -c | sort -nr`. Each `|` connects stdout to stdin: 1. `grep` outputs matching lines, 2. `cut` reads those lines, extracts field 10, 3. `sort` reads the IPs, sorts them, 4.`uniq -c` counts adjacent duplicates, 5. `sort -nr` sorts by count descending.
+- `grep "Failed password" /var/log/auth.log | cut -d " " -f 10 | sort | uniq -c | sort -nr`. Each `|` connects stdout to stdin: 1. `grep` outputs matching lines, 2. `cut` reads those lines, extracts field 10, 3. `sort` reads the IPs, sorts them, 4.`uniq -c` counts adjacent duplicates, 5. `sort -nr` sorts by count descending.  
 - Don't use `grep -v` to find "success." Use `grep` to match the specific string you want (`Accepted`). `-v` is for excluding noise, not for finding a specific category.
 - `uniq -c` only counts **adjacent** duplicates. Without sorting first, identical entries that aren't next to each other get counted separately. That's why you see `admin` three times and `root` twice instead of one combined count.
 - Today I built a fake log and analyzed it. Mistakes: (1) forgot to sort before uniq -c, so counts were split. (2) used grep -v "failed" (lowercase) which matched everything because log has "Failed" (capital F). (3) field 8 extraction for usernames failed on the "invalid user test" line because field numbers shift. Lessons: always sort before uniq -c. Case matters. Field-based extraction breaks when log formats vary.
