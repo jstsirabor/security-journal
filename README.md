@@ -13,10 +13,9 @@ This repository documents my structured, 31-month journey from beginner to AI Se
 ## 🗂️ Repository Structure
 
 - `journal/` – Daily entries (what I tried, what broke, what I learned).
-  - `Month 1/` – My first calendar month of study.
-  - `Pre-Roadmap/` – Foundations and setup work before starting the roadmap.
-- `notes/` – Reference material (vim keybindings, awk/sed/grep summaries, Anki cards).
-- `tools/` – Scripts I wrote (e.g., log analysis, header checker).
+- `labs/` – Structured lab reports and investigation write-ups, organized by month.
+- `notes/` – Reference material.
+- `tools/` – Scripts I wrote.
 - `README.md` – This file.
 
 ## 📚 What I've Covered So Far (Month 1)
@@ -29,6 +28,9 @@ This repository documents my structured, 31-month journey from beginner to AI Se
 - **Network Investigation:** `ss`, `netstat`, `lsof`.
 - **Security Concepts:** Sticky bit, `$PATH` hijacking, reverse shells, log analysis, timestomping, alias persistence, binary integrity (`dpkg -V`).
 - **Wargames:** OverTheWire Bandit levels 0–5.
+## 🔬 Labs
+
+- [Compromised Server Investigation](labs/Month%201/compromised-server-investigation.md) — Log analysis, reverse shell detection, and incident response in a mock environment.
 
 ## 🔍 Key Takeaways
 
