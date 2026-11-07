@@ -1,10 +1,10 @@
 ## Date: 2026-09-07
 
 ### What I tried
--
+- 
 
 ### What broke
--
+- 
 
 ### What I learned
 - Using `.` is not redundant. It forces to be explicit when calling files or folders in the current directory, `./`.
@@ -17,7 +17,7 @@
 - A return statement sends the value back out of the function to wheover called it, so the result can be used elsewhere in the program.
 - Scope is the idea that a variable created in a function can be used only in that function. It is a deliberate safety measure
 - `dig example.com` helps query dns and returns the raw output - the actual ip address and the duration for which it is valid
-- Syn flood involves client sending a lot of SYN requestion and dropping the connection so ACK is never received by the server. This would exhaust the servers capacity to handle legitimate connection attempts.
+- Syn flood involves client sending a lot of SYN request and dropping the connection so ACK is never received by the server. This would exhaust the servers capacity to handle legitimate connection attempts.
 
 ### Commands/code worth remembering
 ```code
