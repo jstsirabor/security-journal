@@ -52,7 +52,45 @@ If the attacker injects JavaScript, that script runs inside the victim's browser
 
 **The Lesson:** `HttpOnly` stops cookie theft. It does **not** stop the attacker from acting as the user through the victim's own browser.
 ```
+- Seeing ARP in wireshark is the computer actively asking the local network, "who has this IP address? Tell me your MAC address" - Layer 2 -> Data link
+- DNS is the computer asking the internet, "What is the IP address for this website?" - Layer 7 -> Presentation
+- TCP is the transport layer establishing connection - Layer 4 -> Transport layer
+- TLSv1.2 and TLSv1.3 is the encryption (HTTPS). Is shows the handshake that establishes a secure connection. It is the protocolthat encrpyts your web traffic
+- QUIC -? This is a modern protocol buikt on top of UDP. It's how modern apps and browsers talk to the internet faster
+- MDNS and IGMPv3 is about network descovery - printers, chromecasts etc
+- ICMPv6 is about IPv6 network diagnotstics like ping
+- Most websites nowadays use HTTPS (TLS) and not HTTP
+- Port 53 is the universal port for DNS
+- If an attacker is sniffing traffic on the local network, they don't need to know the password to learn about you. If they see that you using Phanom (a crypto wallet), it is called network reconnaissance.
+- Since DNS is sent over UDP which is unencrypted by default, an attacker can perform DNS spoofing - meaning replying with a fake IP address to send you a malicious website that looks exactly like phantom
+```
+Look at the details in your screenshot. You are looking at the absolute first step of the TCP 3-way handshake. Here is the top 1% breakdown of what your computer just did:
 
+- **Source IP:** `192.168.8.195` (You)
+- **Destination IP:** `192.168.207.159` (The server)
+- **Source Port:** `54328` (Your computer picked a random high-numbered port to talk from)
+- **Destination Port:** `33455` (The port the server is listening on)
+- **Flags:** `0x002 (SYN)`
+- **Seq: 0, Ack: 0**
+    
+Your computer is saying: _"Hello server, I want to talk to you. Let's synchronize. My starting sequence number is 0."_ No data has been sent yet (`TCP Segment Len: 0`).
+```
+
+```
+QUIC is HTTP/3. It's the modern protocol used by Google, Facebook, and many apps. It runs over UDP to be faster, but it still needs encryption. So, the TLS handshake happens _inside_ the QUIC packet. You just captured a QUIC connection performing a TLS 1.3 handshake.
+
+**Why can you see `app-proxy.phantom.app` if it's encrypted?**  
+Because of the **SNI (Server Name Indication)**. When a server hosts multiple websites (like a shared hosting provider or a CDN), the client has to tell the server _which_ website it wants _before_ the encryption keys are exchanged. If the SNI were encrypted, the server wouldn't know which SSL certificate to present.
+
+So, the Client Hello is sent in plaintext.
+
+**The Attacker Mindset:**  
+If an attacker is sniffing your traffic, they can't see _what_ you are doing inside the encrypted tunnel, but they can see _who_ you are talking to by reading the SNI.
+
+- **Defense (ESNI/ECH):** The industry created ECH (Encrypted Client Hello) to encrypt the SNI so attackers can't even see the domain name. But it's not fully deployed yet.
+    
+- **Attack (SNI Filtering):** Firewalls can block traffic based on the SNI. (e.g., A company firewall blocking `facebook.com` just by reading the Client Hello, without decrypting the traffic).
+```
 ### What broke
 -
 
@@ -134,3 +172,37 @@ Just like wired networks, Wi-Fi access points use MAC address tables. They only 
 
 ### Questions for later
 -
+
+
+```
+### Wireshark Lab: Capturing the OSI Model in the Wild
+
+**1. Interface Selection**
+
+- Before capturing, run `ip a`. Look for `state UP` and `LOWER_UP`.
+    
+- If the interface says `DOWN` or `NO-CARRIER`, there is no traffic flowing. Always capture on the active interface (e.g., `wlp2s0` for Wi-Fi).
+    
+
+**2. The Visibility Reality (Why we can't see others' traffic)**
+
+- On modern networks, you cannot casually see other people's traffic because of **Client Isolation** (on public Wi-Fi), **WPA2/WPA3 encryption** (radio waves are scrambled), and **Switched MAC tables** (the access point only sends data to your specific MAC address).
+    
+
+**3. DNS Reconnaissance**
+
+- **Protocol:** UDP Port 53 (Unencrypted).
+    
+- **Attacker Mindset:** Attackers sniffing the network can read your DNS queries in plaintext. They can see exactly what websites or apps you are connecting to (e.g., seeing a query for a crypto wallet app). This can also lead to **DNS Spoofing** (returning a fake IP).
+    
+
+**4. The TCP 3-Way Handshake (Live)**
+
+- **Step 1 (SYN):** Your computer (random high port) sends `0x002 (SYN)` to the server. _"Let's talk."_
+    
+- **Step 2 (SYN-ACK):** The server replies with `0x012 (SYN, ACK)`. _"I hear you, let's talk."_
+    
+- **Step 3 (ACK):** Your computer replies with `0x010 (ACK)`. Connection established.
+    
+- **The Security Connection:** This live capture proves why **IP Spoofing fails for TCP connections**. Because the server sends the `SYN-ACK` to the source IP of the `SYN`, a spoofed attacker never sees Step 2, and the handshake dies. This is why IP spoofing is only useful for "blind" attacks like DoS.
+```
