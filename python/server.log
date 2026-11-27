@@ -1,0 +1,8 @@
+Jan 10 10:00:01 sshd[1001]: Failed password for admin from 192.168.1.50 port 22 ssh2
+Jan 10 10:00:02 sshd[1002]: Failed password for root from 203.0.113.5 port 22 ssh2
+Jan 10 10:00:03 sshd[1003]: Accepted password for guest from 10.0.0.15 port 22 ssh2
+Jan 10 10:00:04 sshd[1004]: Failed password for admin from 203.0.113.5 port 22 ssh2
+Jan 10 10:00:05 sshd[1005]: Failed password for test from 198.51.100.10 port 22 ssh2
+Jan 10 10:00:06 sshd[1006]: Failed password for root from 203.0.113.5 port 22 ssh2
+Jan 10 10:00:07 sshd[1007]: Failed password for admin from 203.0.113.5 port 22 ssh2
+Jan 10 10:00:08 sshd[1008]: Failed password for admin from 192.168.1.50 port 22 ssh2
