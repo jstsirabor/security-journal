@@ -71,7 +71,6 @@ with open("filtered_scan.txt", "w") as filtered_report:
 	    2. **The TCP Spoof Flaw:** IP spoofing fails for TCP because the server sends the `SYN-ACK` to the spoofed IP. The attacker never gets it, so the handshake dies.
 	    3. **The DoS Use Case:** Because it fails for TCP, spoofing is used for "blind" attacks like SYN Floods (filling the server's SYN queue with half-open connections).
 - ### Drill 3 Notes: Python JSON Parser
-
 	- **The Goal:** Load JSON data, handle missing keys.
 	- **Your Mistake:** Trying to use `.get()` on a raw string (before `json.load()`).    
 	- **The Top 1% Rules:**
@@ -85,13 +84,14 @@ with open("filtered_scan.txt", "w") as filtered_report:
 	    1. **Bash `elif`:** Bash uses `elif`, NOT `else if`.
 	    2. **Spaces Matter:** `if [ -z "$var" ]` requires spaces inside the brackets. `if [-z "$var"]` will crash.
 	    3. **The `-f` Check:** `-z` checks if a string is empty. `-f` checks if the file exists. You need two separate checks.
+	    4. **The Error Taxonomy:** We mapped out the 5 types of errors: Syntax (grammar), Logic (runs but wrong), Runtime (crashes while running), Semantic (bad data/empty file), and Process (OS-level like permission denied).
 - ### Drill 5 Notes: Python File I/O & List Comprehensions
-	- **The Goal:** Read a file, filter lines, write to a new file.  
-	- **Your Mistake:** `.write(var1, var2)` syntax error, and not using `.strip()` in the list comprehension.
-	- **The Top 1% Rules:**  
-	    1. **`.write()` Syntax:** It only takes **one** argument. `file.write(text)`. If you want a newline, you must add it manually: `file.write(text + "\n")`.
-	    2. **List Comprehension Stripping:** If you want the cleaned data in your new list, you must strip it _inside_ the comprehension: `[line.strip() for line in lines if "open" in line]`.
-	    3. **Indentation:** `print()` outside the `for` loop runs once. Inside the loop, it runs on every iteration.
+	- **The Goal:** Read a file, filter lines containing "open", and write them to a new file.  
+	- **Your Mistake:** You passed two arguments to `.write()` (it only takes one), you didn't `.strip()` the lines inside the comprehension, and you indented the `print()` inside the loop.  
+	- **The Top 1% Corrections:**
+		- **`.write()` Syntax:** It only takes one string argument. If you want a newline, you must add it manually: `file.write(port + "\n")`.    
+		- **Comprehension Stripping:** If you want the cleaned data in your new list, you must strip it _inside_ the comprehension: `[port.strip() for port in lines if "open" in port]`.
+		- **Indentation:** `print()` outside the `for` loop runs once. Inside the loop, it runs on every iteration.
 
 
 ### Commands/code worth remembering
