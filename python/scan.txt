@@ -1,0 +1,5 @@
+22 open
+80 closed
+443 open
+8080 open
+3306 closed
