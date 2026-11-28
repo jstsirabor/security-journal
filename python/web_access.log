@@ -1,0 +1,8 @@
+203.0.113.5 - - [10/Oct/2026] "GET /login.php" 404 - "Mozilla"
+203.0.113.5 - - [10/Oct/2026] "GET /admin.php" 404 - "Mozilla"
+10.0.0.15 - - [10/Oct/2026] "GET /home" 200 - "Mozilla"
+203.0.113.5 - - [10/Oct/2026] "GET /wp-config.php" 404 - "Mozilla"
+198.51.100.10 - - [10/Oct/2026] "GET /secret.txt" 404 - "Googlebot"
+198.51.100.10 - - [10/Oct/2026] "GET /robots.txt" 200 - "Googlebot"
+203.0.113.5 - - [10/Oct/2026] "GET /backup.sql" 404 - "Mozilla"
+192.168.1.100 - - [10/Oct/2026] "GET /profile" 404 - "Mozilla"
